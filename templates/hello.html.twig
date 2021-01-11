@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {# {{parent()}} #}
     <ul>
         <li><a href="{{ path('helloName',{'name': 'Olivier'})}}">Oliver</a></li>
         <li><a href="{{ path('helloName',{'name': 'Nico'})}}">Nico</a></li>

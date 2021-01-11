@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\HelloService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,32 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
+    /**
+     * @Route("helloService")
+     *
+     * @return Response
+     */
+    public function hello(HelloService $helloService)
+    {
+        $string = $helloService->hello();
+
+        return new Response($string);
+    }
+    /**
+     * @Route({
+     *      "fr": "/bonjour",
+     *      "en": "/hello",
+     *      "es": "/hola"
+     * })
+     *
+     * @return Response
+     */
+    public function helloLocale(Request $request)
+    {
+        $locale = $request->getLocale();
+        return new Response("hello, locale : " . $locale);
+    }
+    
     /**
      * @Route("helloName/{name}", name="helloName")
      * 

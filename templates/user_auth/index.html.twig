@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserAuth index{% endblock %}
+
+{% block body %}
+    <h1>UserAuth index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user_auth in user_auths %}
+            <tr>
+                <td>{{ user_auth.id }}</td>
+                <td>{{ user_auth.email }}</td>
+                <td>{{ user_auth.roles ? user_auth.roles|json_encode : '' }}</td>
+                <td>{{ user_auth.password }}</td>
+                <td>{{ user_auth.name }}</td>
+                <td>
+                    <a href="{{ path('user_auth_show', {'id': user_auth.id}) }}">show</a>
+                    <a href="{{ path('user_auth_edit', {'id': user_auth.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_auth_new') }}">Create new</a>
+{% endblock %}
